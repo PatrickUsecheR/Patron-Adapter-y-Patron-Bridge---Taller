@@ -1,0 +1,14 @@
+/bin/
+/out/
+/target/
+/node_modules/
+*.class
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+npm-debug.log*
+.DS_Store
+Thumbs.db
+/.idea/

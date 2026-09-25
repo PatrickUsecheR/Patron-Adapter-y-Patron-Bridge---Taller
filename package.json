@@ -1,0 +1,14 @@
+{
+  "name": "sonora-multichannel-player",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "check:js": "node scripts/check-js.mjs",
+    "test:smoke": "node scripts/smoke-test.mjs",
+    "test": "npm run check:js && node scripts/test-unit.mjs && npm run test:smoke"
+  }
+}
