@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f2ed">
+  <title>Sonora | Multichannel Player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Sonora, inicio">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>sonora<span class="brand-period">.</span></span>
+    </a>
+    <div class="topbar-center"><span class="live-dot"></span> YOUR SOUND, IN ONE PLACE</div>
+    <div class="profile-mark" aria-label="Perfil de usuario">M</div>
+  </header>
+
+  <main class="app-grid">
+    <aside class="sidebar">
+      <div class="sidebar-label">TU ESPACIO</div>
+      <button class="side-link active" type="button"><span class="side-icon">⌂</span> Escuchar</button>
+      <button class="side-link" type="button"><span class="side-icon">▤</span> Tu biblioteca</button>
+
+      <div class="source-heading">
+        <span class="sidebar-label">FUENTES</span>
+        <span id="source-count" class="count-badge">03</span>
+      </div>
+      <div class="source-list" role="group" aria-label="Filtrar por fuente">
+        <button class="source-filter selected" type="button" data-provider="all"><span class="source-dot all-dot"></span> Todas <span class="source-count">06</span></button>
+        <button class="source-filter" type="button" data-provider="youtube"><span class="source-dot youtube-dot"></span> YouTube <span class="source-count">02</span></button>
+        <button class="source-filter" type="button" data-provider="spotify"><span class="source-dot spotify-dot"></span> Spotify <span class="source-count">02</span></button>
+        <button class="source-filter" type="button" data-provider="local"><span class="source-dot local-dot"></span> Mi biblioteca <span class="source-count">02</span></button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="connection-status"><span class="connection-led"></span><span>3 fuentes conectadas</span></div>
+        <span class="sidebar-version">SONORA WEB PLAYER <span>v1.0</span></span>
+      </div>
+    </aside>
+
+    <section class="library" aria-label="Biblioteca de música">
+      <div class="library-heading">
+        <div>
+          <p class="eyebrow">VIERNES, 25 DE SEPTIEMBRE</p>
+          <h1>Encuentra tu <span>frecuencia.</span></h1>
+        </div>
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="search-input" type="search" placeholder="Canción, artista o álbum" autocomplete="off" aria-label="Buscar canciones">
+          <kbd>/</kbd>
+        </label>
+      </div>
+
+      <section class="feature-band" aria-label="Selección del día">
+        <div class="feature-copy">
+          <p class="eyebrow">UNA SOLA BIBLIOTECA <span class="feature-star">✳</span></p>
+          <h2>Tres mundos.<br>Un solo <em>play.</em></h2>
+          <p class="feature-note">Todo lo que escuchas, reunido aquí.</p>
+        </div>
+        <div class="feature-art" aria-hidden="true">
+          <div class="art-disc"><div class="disc-label">S<span>°</span></div></div>
+          <span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✳</span>
+          <span class="art-sticker">SIDE<br>A</span>
+        </div>
+        <span class="feature-index">NO. 001 / 003</span>
+      </section>
+
+      <div class="track-heading">
+        <div><p class="eyebrow">CATÁLOGO UNIFICADO</p><h2>Tu música <span id="result-total">06</span></h2></div>
+        <label class="sort-control">ORDENAR <select id="sort-select" aria-label="Ordenar resultados"><option value="title">A — Z</option><option value="provider">Fuente</option></select></label>
+      </div>
+      <div class="track-list" id="track-list" aria-live="polite"></div>
+      <p class="catalog-note"><span class="catalog-note-mark">✳</span> Metadatos normalizados desde cada fuente</p>
+    </section>
+
+    <aside class="player-column" aria-label="Reproductor">
+      <div class="player-topline"><span class="eyebrow">REPRODUCIENDO AHORA</span><span class="queue-label"><span></span> SESIÓN 01</span></div>
+      <div class="view-switch" role="group" aria-label="Vista del reproductor">
+        <button type="button" data-view="mini" class="view-option active" aria-pressed="true">Mini</button>
+        <button type="button" data-view="full" class="view-option" aria-pressed="false">Full</button>
+        <button type="button" data-view="sidebar" class="view-option" aria-pressed="false">Widget</button>
+      </div>
+      <article class="player-card" id="player-card">
+        <div id="player-view" class="player-view"></div>
+        <div id="engine-host" class="engine-host" aria-label="Reproductor multimedia"></div>
+        <div class="player-controls">
+          <div class="transport-row">
+            <button class="transport-button" id="previous-button" type="button" aria-label="Canción anterior">|◀</button>
+            <button class="play-button" id="play-button" type="button" aria-label="Reproducir">▶</button>
+            <button class="transport-button" id="next-button" type="button" aria-label="Siguiente canción">▶|</button>
+          </div>
+          <div class="timeline-row"><span id="elapsed-time">0:00</span><input id="seek-slider" type="range" min="0" max="100" value="0" aria-label="Posición de reproducción"><span id="duration-time">0:00</span></div>
+        </div>
+        <div class="player-footer"><span id="engine-label">HTML5 AUDIO ENGINE</span><label><span aria-hidden="true">◖))</span><input id="volume-slider" type="range" min="0" max="100" value="75" aria-label="Volumen"></label></div>
+      </article>
+      <div class="engine-note" id="engine-note"><span class="note-indicator"></span><span id="engine-status">Selecciona una pista para comenzar</span></div>
+      <div class="bridge-caption"><span>PLAYER VIEW</span><i>↔</i><span>PLAYBACK ENGINE</span></div>
+      <div class="player-bottom-art" aria-hidden="true"><div class="equalizer"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>KEEP THE<br>GOOD ON</span><span class="bottom-stamp">S / 01</span></div>
+    </aside>
+  </main>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
